@@ -17,3 +17,5 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/public/uploads/drive_licence_image/*
+/public/uploads/profile_image/*
