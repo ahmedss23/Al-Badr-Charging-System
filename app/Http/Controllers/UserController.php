@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\DataTransferObjects\UserData;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -47,21 +48,9 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        $data = $request->validated();
-        User::create([
-            'first_name' => $data['first_name'],
-            'mid_name' => $data['mid_name'] ?? null,
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-            'mobile' => $data['mobile'],
-            'password' => Hash::make($data['password']),
-            // 'address' => $data['address'],
-            'location_longitude' => $data['location_longitude'],
-            'location_latitude' => $data['location_latitude'],
-            'profile_image' => uploadImage('profile_images', $data['profile_image']),
-            'drive_licence_image' => isset($data['drive_licence_image']) ? uploadImage('drive_licence_images' ,$data['drive_licence_image']) : null,
-            'is_active' => 1,
-        ]);
+        $dto = UserData::fromRequest($request);
+        $data = get_object_vars($dto);
+        User::create($data);
 
         return redirect()->route('admin.dashboard');
     }
@@ -73,23 +62,18 @@ class UserController extends Controller
 
     public function update(UserRequest $request, User $user)
     {
-        $data = $request->validated();
+        $dto = UserData::fromRequest($request);
+        $data = get_object_vars($dto);
+
+        if($data['password'] == null)
+            unset($data['password']);
+
         deleteImage('profile_images', $user->profile_image);
+
         if($user->drive_licence_image)
             deleteImage('drive_licence_images', $user->drive_licence_image);
-        $user->update([
-            'first_name' => $data['first_name'],
-            'mid_name' => $data['mid_name'] ?? null,
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-            'mobile' => $data['mobile'],
-            'password' => Hash::make($data['password']),
-            // 'address' => $data['address'],
-            'location_longitude' => $data['location_longitude'],
-            'location_latitude' => $data['location_latitude'],
-            'profile_image' => uploadImage('profile_images', $data['profile_image']),
-            'drive_licence_image' => isset($data['drive_licence_image']) ? uploadImage('drive_licence_images' ,$data['drive_licence_image']) : null,
-        ]);
+
+        $user->update($data);
 
         return redirect()->route('admin.dashboard');
     }
