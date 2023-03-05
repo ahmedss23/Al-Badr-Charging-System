@@ -15,7 +15,8 @@
 
     <!-- Scripts -->
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
-    <link rel="stylesheet" href="{{asset('/build/assets/app-67dcdfd2.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('/build/assets/app-67dcdfd2.css')}}"> --}}
+    <link rel="stylesheet" href="{{asset('/style/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('/style/dataTables.bootstrap5.min.css')}}">
     <link rel="stylesheet" href="{{asset('/style/responsive.dataTables.min.css')}}">
 </head>
@@ -79,7 +80,8 @@
             @yield('content')
         </main>
     </div>
-    <script src="{{asset('/build/assets/app-574a67f2.js')}}"></script>
+    {{-- <script src="{{asset('/build/assets/app-574a67f2.js')}}"></script> --}}
+    <script src="{{asset('/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('/js/jquery.min.js')}}"></script>
     <script>
         $.ajaxSetup({
