@@ -15,7 +15,7 @@
                             <label for="first_name" class="col-md-4 col-form-label text-md-end required-field">{{ __('First Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ $user->first_name ?? old('first_name') }}" required autocomplete="first_name" autofocus>
+                                <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') ?? $user->first_name }}" required autocomplete="first_name" autofocus>
 
                                 @error('first_name')
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
                             <label for="mid_name" class="col-md-4 col-form-label text-md-end">{{ __('Mid Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="mid_name" type="text" class="form-control @error('mid_name') is-invalid @enderror" name="mid_name" value="{{ $user->mid_name ?? old('mid_name') }}" autocomplete="mid_name">
+                                <input id="mid_name" type="text" class="form-control @error('mid_name') is-invalid @enderror" name="mid_name" value="{{ old('mid_name') ?? $user->mid_name }}" autocomplete="mid_name">
 
                                 @error('mid_name')
                                     <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
                             <label for="last_name" class="col-md-4 col-form-label text-md-end required-field">{{ __('Last Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ $user->last_name ?? old('last_name') }}" required autocomplete="last_name">
+                                <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') ?? $user->last_name }}" required autocomplete="last_name">
 
                                 @error('last_name')
                                     <span class="invalid-feedback" role="alert">
@@ -57,7 +57,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-end required-field">{{ __('Email Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email ?? old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') ?? $user->email }}" required autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -71,7 +71,7 @@
                             <label for="mobile" class="col-md-4 col-form-label text-md-end required-field">{{ __('Mobile') }}</label>
 
                             <div class="col-md-6">
-                                <input id="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{ $user->mobile ?? old('mobile') }}" required autocomplete="mobile">
+                                <input id="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') ?? $user->mobile }}" required autocomplete="mobile">
 
                                 @error('mobile')
                                     <span class="invalid-feedback" role="alert">
@@ -105,13 +105,39 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <label for="address" class="col-md-4 col-form-label text-md-end required-field">{{ __('Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ $user->address ?? old('address') }}" required autocomplete="address">
+                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') ?? $user->address }}" required autocomplete="address">
 
                                 @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div> --}}
+
+                        <div class="row mb-3">
+                            <label for="location_latitude" class="col-md-4 col-form-label text-md-end required-field">{{ __('Location Latitude') }}</label>
+                            <div class="col-md-6">
+                                <input id="location_latitude" type="number" step="0.00001" min="-180" max="180" class="form-control @error('location_latitude') is-invalid @enderror" name="location_latitude" value="{{ old('location_latitude') ?? $user->location_latitude }}" required autocomplete="location_latitude">
+
+                                @error('location_latitude')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="location_longitude" class="col-md-4 col-form-label text-md-end required-field">{{ __('Location Longitude') }}</label>
+                            <div class="col-md-6">
+                                <input id="location_longitude" type="number" step="0.00001" min="-180" max="180" class="form-control @error('location_longitude') is-invalid @enderror" name="location_longitude" value="{{ old('location_longitude') ?? $user->location_longitude }}" required autocomplete="location_longitude">
+
+                                @error('location_longitude')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

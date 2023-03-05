@@ -59,7 +59,9 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'mobile' => ['required', 'string', new EgNumber],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'address' => ['required', 'string'],
+            // 'address' => ['required', 'string'],
+            'location_longitude' => ['required', 'numeric', 'min:-180', 'max:180'],
+            'location_latitude' => ['required', 'numeric', 'min:-180', 'max:180'],
             'profile_image' => ['required', 'file', 'image'],
             'drive_licence_image' => ['file', 'image'],
         ]);
@@ -80,7 +82,9 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'mobile' => $data['mobile'],
             'password' => Hash::make($data['password']),
-            'address' => $data['address'],
+            // 'address' => $data['address'],
+            'location_longitude' => $data['location_longitude'],
+            'location_latitude' => $data['location_latitude'],
             'profile_image' => uploadImage('profile_images', $data['profile_image']),
             'drive_licence_image' => isset($data['drive_licence_image']) ? uploadImage('drive_licence_images' ,$data['drive_licence_image']) : null,
         ]);

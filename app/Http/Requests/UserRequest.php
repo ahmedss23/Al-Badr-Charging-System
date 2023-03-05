@@ -26,7 +26,9 @@ class UserRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'mid_name' => ['nullable', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string'],
+            // 'address' => ['required', 'string'],
+            'location_longitude' => ['required', 'numeric', 'min:-180', 'max:180'],
+            'location_latitude' => ['required', 'numeric', 'min:-180', 'max:180'],
             'profile_image' => ['required', 'file', 'image'],
             'drive_licence_image' => ['file', 'image'],
         ];

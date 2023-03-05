@@ -20,7 +20,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('mobile')->unique();
-            $table->string('address');
+            // $table->string('address');
+            $table->double('location_longitude');
+            $table->double('location_latitude');
             $table->string('profile_image');
             $table->string('drive_licence_image')->nullable();
             $table->tinyInteger('is_active')->default(0);

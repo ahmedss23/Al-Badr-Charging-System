@@ -105,13 +105,39 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <label for="address" class="col-md-4 col-form-label text-md-end required-field">{{ __('Address') }}</label>
 
                             <div class="col-md-6">
                                 <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address">
 
                                 @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div> --}}
+
+                        <div class="row mb-3">
+                            <label for="location_latitude" class="col-md-4 col-form-label text-md-end required-field">{{ __('Location Latitude') }}</label>
+                            <div class="col-md-6">
+                                <input id="location_latitude" type="number" step="0.00001" min="-180" max="180" class="form-control @error('location_latitude') is-invalid @enderror" name="location_latitude" value="{{ old('location_latitude') }}" required autocomplete="location_latitude">
+
+                                @error('location_latitude')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="location_longitude" class="col-md-4 col-form-label text-md-end required-field">{{ __('Location Longitude') }}</label>
+                            <div class="col-md-6">
+                                <input id="location_longitude" type="number" step="0.00001" min="-180" max="180" class="form-control @error('location_longitude') is-invalid @enderror" name="location_longitude" value="{{ old('location_longitude') }}" required autocomplete="location_longitude">
+
+                                @error('location_longitude')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

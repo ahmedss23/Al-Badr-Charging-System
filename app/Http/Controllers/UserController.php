@@ -21,7 +21,7 @@ class UserController extends Controller
 
     public function index(): JsonResponse
     {
-        $users = $users = User::orderBy('address', 'ASC')->get();
+        $users = $users = User::orderBy('location_longitude', 'ASC')->orderBy('location_latitude', 'ASC')->get();
         return datatables()->of($users)
         ->addColumn('operations', function($row){
             $update = auth('admin')->user()->can('update users') ? '<a href="' . route('admin.users.edit', $row->id) . '" class="btn btn-primary btn-sm">Update</a>' : '';
@@ -31,6 +31,9 @@ class UserController extends Controller
         })
         ->addColumn('full_name', function ($row){
             return $row->first_name . ' ' . $row->mid_name . ' ' . $row->last_name;
+        })
+        ->addColumn('address', function($row){
+            return 'Long: ' . $row->location_longitude . ' Lat: ' . $row->location_latitude;
         })
         ->rawColumns(['operations'])
         ->toJson();
@@ -52,7 +55,9 @@ class UserController extends Controller
             'email' => $data['email'],
             'mobile' => $data['mobile'],
             'password' => Hash::make($data['password']),
-            'address' => $data['address'],
+            // 'address' => $data['address'],
+            'location_longitude' => $data['location_longitude'],
+            'location_latitude' => $data['location_latitude'],
             'profile_image' => uploadImage('profile_images', $data['profile_image']),
             'drive_licence_image' => isset($data['drive_licence_image']) ? uploadImage('drive_licence_images' ,$data['drive_licence_image']) : null,
             'is_active' => 1,
@@ -79,7 +84,9 @@ class UserController extends Controller
             'email' => $data['email'],
             'mobile' => $data['mobile'],
             'password' => Hash::make($data['password']),
-            'address' => $data['address'],
+            // 'address' => $data['address'],
+            'location_longitude' => $data['location_longitude'],
+            'location_latitude' => $data['location_latitude'],
             'profile_image' => uploadImage('profile_images', $data['profile_image']),
             'drive_licence_image' => isset($data['drive_licence_image']) ? uploadImage('drive_licence_images' ,$data['drive_licence_image']) : null,
         ]);
